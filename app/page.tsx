@@ -21,7 +21,7 @@ export default function Home() {
         <button onClick={() => {createDocument({title: "hello world"})}} className="text-white">Click Me</button>
 
         {documents?.map((doc) => (
-          <div key={doc.id}>{doc.title}</div>
+          <div key={doc._id}>{doc.title}</div>
         ))}
       </Authenticated>
     </main>
