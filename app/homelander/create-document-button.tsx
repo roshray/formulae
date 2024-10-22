@@ -1,7 +1,3 @@
-
-import { Button } from "@/components/ui/button";
-import { api } from "@/convex/_generated/api";
-import { useMutation } from "convex/react";
 import {
   Dialog,
   DialogContent,
@@ -11,19 +7,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import UploadDocumentForm from "./upload-document-form";
+import { Button } from "@/components/ui/button";
 
 export default function CreateDocumentButton() {
-  const createDocument = useMutation(api.documents.createDocument)
+
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button
-                    onClick={()=>{
-                        createDocument({title: "hello world"})
-                    }}
-                >
-                    Upload Button
-                </Button>
+                <Button>Upload Document</Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

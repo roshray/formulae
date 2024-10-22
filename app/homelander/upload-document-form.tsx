@@ -4,8 +4,12 @@ import { Button } from "@/components/ui/button"
 import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "@/components/ui/input"
-import { Form, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
+import { Form } from '@/components/ui/form'
 import { z } from "zod"
+import { createDocument } from "@/convex/documents"
+import { api } from "@/convex/_generated/api"
+import { useMutation } from "convex/react"
 
 const formSchema = z.object({
   title: z.string().min(1).max(250),
@@ -13,7 +17,7 @@ const formSchema = z.object({
 
 
 export default function UploadDocumentForm() {
-
+  const createDocument = useMutation(api.documents.createDocument)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -22,7 +26,8 @@ export default function UploadDocumentForm() {
   })
     function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-
+    createDocument(values)
+    }
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -33,7 +38,7 @@ export default function UploadDocumentForm() {
                         <FormItem>
                         <FormLabel>Title</FormLabel>
                         <FormControl>
-                            <Input placeholder="expence report" {...field} />
+                            <Input placeholder="Expence Report" {...field} />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
@@ -44,5 +49,4 @@ export default function UploadDocumentForm() {
         </Form>
     
         )
-    }
 }
