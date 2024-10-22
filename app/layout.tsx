@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter as FontSans} from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import { Header } from "./header";
+import { Header } from "./homelander/header";
 import { cn } from "@/lib/utils";
 
 const fontSans  = FontSans({ 
