@@ -13,7 +13,7 @@ export default function Home() {
   const createDocument = useMutation(api.documents.createDocument)
   
   return (
-    <main className="flex ">
+    <main className="flex flex-col items-center gap-4 mt-2">
       <Unauthenticated>
         <SignInButton />
       </Unauthenticated>
