@@ -8,11 +8,12 @@ import {
 } from "@/components/ui/dialog"
 import UploadDocumentForm from "./upload-document-form";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export default function CreateDocumentButton() {
-
+    const [isopen, setIsOpen] = useState(false)
     return (
-        <Dialog>
+        <Dialog onOpenChange={setIsOpen} open={isopen}>
             <DialogTrigger asChild>
                 <Button>Upload Document</Button>
             </DialogTrigger>
@@ -22,7 +23,7 @@ export default function CreateDocumentButton() {
                 <DialogDescription>
                    Upload a team document
                 </DialogDescription>
-                <UploadDocumentForm />
+                <UploadDocumentForm onUpload={()=> setIsOpen(false)}/>
             </DialogHeader>
         </DialogContent>
 </Dialog>

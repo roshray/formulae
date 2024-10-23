@@ -10,13 +10,18 @@ import { z } from "zod"
 import { createDocument } from "@/convex/documents"
 import { api } from "@/convex/_generated/api"
 import { useMutation } from "convex/react"
+import { Loader2, Loader2Icon } from "lucide-react"
+import LoadingButton from "@/components/ui/loading-button"
 
 const formSchema = z.object({
   title: z.string().min(1).max(250),
 })
 
 
-export default function UploadDocumentForm() {
+export default function UploadDocumentForm({
+  onUpload,
+}: { onUpload: () => void;
+}) {
   const createDocument = useMutation(api.documents.createDocument)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -24,9 +29,10 @@ export default function UploadDocumentForm() {
       title: "",
     },
   })
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-    createDocument(values)
+    await createDocument(values)
+    onUpload()
     }
     return (
         <Form {...form}>
@@ -44,7 +50,12 @@ export default function UploadDocumentForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Upload</Button>
+              <LoadingButton 
+                  isLoading={form.formState.isSubmitting}
+                  loadingText="Uploading..."
+              >
+                Upload
+              </LoadingButton>
             </form>
         </Form>
     
