@@ -9,7 +9,7 @@ export default function LoadingButton(
         loadingText,
 } : {
     isLoading: boolean;
-    children:ReactNode;
+    children: ReactNode;
     loadingText: string;
 
 }) {
