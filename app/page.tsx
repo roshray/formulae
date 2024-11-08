@@ -8,8 +8,9 @@ import UploadDocumentButton from "./homelander/upload-document-button";
 
 export default function Home() {
 
-  const documents = useQuery(api.documents.getDocuments)
-  
+ // const documents = useQuery(api.documents.getDocuments)
+    const documents = useQuery(api.documents.getDocuments);
+
   return (
     <main className="p-24 space-y-8">
 
@@ -19,9 +20,9 @@ export default function Home() {
         </div>
         
         <div className="grid grid-cols-4 gap-8">
-          {documents?.map((doc) => (
+          {documents?.map((doc) => 
               <DocumentCard document={doc} />
-          ))}
+          )}
         </div>
     </main>
 

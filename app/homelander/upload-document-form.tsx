@@ -9,6 +9,7 @@ import { z } from "zod"
 import { api } from "@/convex/_generated/api"
 import { useMutation } from "convex/react"
 import LoadingButton from "@/components/ui/loading-button"
+import { Id } from "@/convex/_generated/dataModel"
 
 const formSchema = z.object({
   title: z.string().min(1).max(250),
@@ -38,11 +39,11 @@ export default function UploadDocumentForm({
         headers: { "Content-Type": values.file.type },
         body: values.file,
       });
-      const { fileId} =  await  result.json()
+      const { storageId} =  await  result.json()
 
      await createDocument({
       title: values.title,
-      fileId: fileId as string,
+      fileId: storageId as Id<"_storage">,
      })
      onUpload()
     }
@@ -77,7 +78,7 @@ export default function UploadDocumentForm({
                               const file = event.target.files?.[0]
                               onChange(file)
                             }}
-                            />
+                          />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
